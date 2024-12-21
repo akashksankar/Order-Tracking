@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Order Tracking UI</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://img.freepik.com/free-photo/logistics-transportation-container-cargo-ship-cargo-plane-with-working-crane-bridge-shipyard-sunrise-logistic-import-export-transport-industry-background-ai-generative_123827-24177.jpg?t=st=1734791897~exp=1734795497~hmac=903e71997c86bc5b0181ecaeecf4f19dd6596121a5442bf5bcf781ee5ea9392a&w=1060');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 10;
+    }
+
+    .kinetic-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Poppins', sans-serif;
+      font-size: 60px;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      text-align: center;
+      overflow: hidden;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .kinetic-text span {
+      display: inline-block;
+      animation: moveText 5s infinite linear;
+    }
+
+    @keyframes moveText {
+      0% {
+        transform: translateX(100%);
+      }
+      50% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(-150%);
+      }
+    }
+
+    .order-tracking {
+      width: 300px;
+      position: relative;
+      padding-left: 30px;
+      z-index: 2;
+    }
+
+    .step {
+      position: relative;
+      padding: 20px 10px 20px 40px;
+      background-color: white;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .step.active {
+      transform: scale(1.05);
+      background-color: #e0f7fa;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      background-color: #00ddff;
+      border-radius: 50%;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .step.active::before {
+      background-color: #00ff08;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 100%;
+      background-color: #cccccc;
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .step p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @keyframes highlight {
+        
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .step.active {
+      animation: highlight 1s ease-in-out;
+    }
+
+    .btn-container {
+      text-align: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #00acc1;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #00838f;
+    }
+  </style>
+</head>
+<body>
+  <div class="kinetic-text">
+    <span>Fast | Reliable | Secure</span>
+  </div>
+  <div class="order-tracking">
+    <div class="step active" id="step-1">
+      <h4>Shipment Placed</h4>
+      <p>Your Shipment has been placed successfully.</p>
+    </div>
+    <div class="step" id="step-2">
+      <h4>Shipment Processed</h4>
+      <p>We are preparing your Shipment.</p>
+    </div>
+    <div class="step" id="step-3">
+      <h4>Shipped</h4>
+      <p>Your Shipment is on its way.</p>
+    </div>
+    <div class="step" id="step-4">
+      <h4>Delivered</h4>
+      <p>Your Shipment has been delivered.</p>
+    </div>
+  </div>
+ 
+</body>
+</html>
