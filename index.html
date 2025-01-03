@@ -23,17 +23,35 @@
 
     .kinetic-text {
       position: absolute;
-      top: 10%;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       font-family: 'Poppins', sans-serif;
       font-size: 60px;
       font-weight: 700;
       color: white;
       text-transform: uppercase;
       text-align: center;
+      overflow: hidden;
       line-height: 1.2;
       white-space: nowrap;
+    }
+
+    .kinetic-text span {
+      display: inline-block;
+      animation: moveText 5s infinite linear;
+    }
+
+    @keyframes moveText {
+      0% {
+        transform: translateX(100%);
+      }
+      50% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(-150%);
+      }
     }
 
     .order-tracking {
@@ -58,10 +76,6 @@
       background-color: #e0f7fa;
     }
 
-    .step.highlight {
-      animation: highlight 1.5s infinite;
-    }
-
     .step::before {
       content: '';
       position: absolute;
@@ -70,8 +84,14 @@
       transform: translateY(-50%);
       width: 12px;
       height: 12px;
-      background-color: #00ddff;
+      background-color: #22ff00;
       border-radius: 50%;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .step.active::before {
+      background-color: #00ff08;
+      
     }
 
     .step::after {
@@ -89,29 +109,54 @@
       display: none;
     }
 
-    @keyframes highlight {
-      0% { box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.7); }
-      50% { box-shadow: 0 0 30px 10px rgba(255, 204, 0, 1); }
-      100% { box-shadow: 0 0 15px 5px rgba(255, 204, 0, 0.7); }
+    .step h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
     }
 
-    .popup {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    .step p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    @keyframes highlight {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .step.active {
+      animation: highlight 1s ease-in-out;
+       transform: scale(1.05);
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
       background-color: #00acc1;
       color: white;
-      padding: 15px 20px;
+      border: none;
       border-radius: 5px;
-      font-size: 16px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      display: none;
-      z-index: 1000;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease-in-out;
     }
 
-    .popup.show {
-      display: block;
+    .btn:hover {
+      background-color: #00838f;
     }
   </style>
 </head>
@@ -136,29 +181,9 @@
       <h4>Delivered</h4>
       <p>Your Shipment has been delivered.</p>
     </div>
+    <div class="btn-container">
+      <a href="view-application.html" class="btn">View Application</a>
+    </div>
   </div>
-
-  <div class="popup" id="popup">
-    Shipment Processed: Your order is being prepared.
-  </div>
-
-  <script>
-    // Highlight "Shipment Processed" and show popup
-    document.addEventListener("DOMContentLoaded", () => {
-      const step2 = document.getElementById("step-2");
-      const popup = document.getElementById("popup");
-
-      // Show popup
-      popup.classList.add("show");
-
-      // Highlight step
-      step2.classList.add("highlight");
-
-      // Hide popup after 3 seconds
-      setTimeout(() => {
-        popup.classList.remove("show");
-      }, 3000);
-    });
-  </script>
 </body>
 </html>
